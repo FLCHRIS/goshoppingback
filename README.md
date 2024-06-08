@@ -1,29 +1,6 @@
 # Go shopping 🛒
 
-Este es un proyecto para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Además, hace uso de diversas tecnologías y buenas prácticas en el desarrollo de software.
-
-## Tabla de Contenidos
-
-- [Descripción](#descripción)
-- [Características](#características)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Endpoints](#endpoints)
-
-## Descripción
-
-Este proyecto es una API de **e-commerce** 🛒 diseñada para gestionar usuarios, productos, ventas y sus relaciones. Está diseñada para ser escalable, fácil de mantener y segura. El objetivo principal es mostrar mis habilidades en el desarrollo backend. 🙃
-
-## Características
-
-- **Gestión de Usuarios**: Registro, autenticación, edición y eliminación de usuarios.
-- **Gestión de Productos**: Creación, edición, eliminación y visualización de productos.
-- **Carrito de Compras**: Agregar, eliminar productos del carrito, calcular total y realizar pagos.
-- **Favoritos**: Agregar y eliminar productos de favoritos, visualización de productos favoritos.
-- **Ventas**: Realización de ventas y gestión de pedidos.
-- **Búsquedas**: Búsqueda de productos por nombre y categoría.
-- **Subida de Imágenes**: Manejo de imágenes de productos.
+Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones, mostrando mis habilidades en el desarrollo backend. 🙃
 
 ## Tecnologías utilizadas
 
@@ -37,3 +14,13 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para gestionar usuario
   ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white)
 
 </div>
+
+## Características
+
+- **Gestión de Usuarios**: Registro, autenticación, edición y eliminación de usuarios.
+- **Gestión de Productos**: Creación, edición, eliminación y visualización de productos.
+- **Carrito de Compras**: Agregar, eliminar productos del carrito, calcular total y realizar pagos.
+- **Favoritos**: Agregar y eliminar productos de favoritos, visualización de productos favoritos.
+- **Ventas**: Realización de ventas y gestión de pedidos.
+- **Búsquedas**: Búsqueda de productos por nombre y categoría.
+- **Subida de Imágenes**: Manejo de imágenes de productos.
