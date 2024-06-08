@@ -1,10 +1,5 @@
 # Go shopping 🛒
 
-## Requirements
-
-`.env` file needs to be created with the following variables:
-- **DATABASE_URL**="mysql://`user`:`password`@localhost:3306/goshopping"
-
 Requerimientos:
   - Cuenta de usuario
     - [⏱️] Poder crear una cuenta de usuario
