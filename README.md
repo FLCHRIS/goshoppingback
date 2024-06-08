@@ -2,8 +2,8 @@
 
 Requerimientos:
   - Cuenta de usuario
-    - [⏱️] Poder crear una cuenta de usuario
-    - [] Poder iniciar sesión con una cuenta existente
+    - [✅] Poder crear una cuenta de usuario
+    - [⏱️] Poder iniciar sesión con una cuenta existente
     - [] Poder cerrar sesión
     - [] Poder editar la cuenta de usuario
     - [] Poder eliminar la cuenta de usuario
