@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserDto } from "../dto/auth.dto";
+import { CreateUserDto, LoginUserDto } from "../dto/auth.dto";
 import { isEmpty, isValidEmail } from "../utils/validations";
 import * as authServices from "../services/auth.services";
 
@@ -34,4 +34,24 @@ export const register = async (req: Request, res: Response) => {
   }
 
   return res.status(userCreated.status).json({ message: userCreated.message });
+};
+
+export const logIn = async (req: Request, res: Response) => {
+  const user = req.body as LoginUserDto;
+
+  if (isEmpty(user.email)) {
+    return res.status(400).json({ message: "Email is required" });
+  }
+  if (isEmpty(user.password)) {
+    return res.status(400).json({ message: "Password is required" });
+  }
+  if (!isValidEmail(user.email)) {
+    return res.status(400).json({ message: "Email is not valid" });
+  }
+
+  const { error, message, status, data } = await authServices.logIn(user);
+
+  if (error) return res.status(status).json({ message });
+
+  return res.status(status).json({ message, data });
 };
