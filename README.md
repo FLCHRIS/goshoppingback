@@ -28,10 +28,11 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
 ## Requerimientos:
   - Cuenta de usuario
     - [✅] Poder crear una cuenta de usuario
-    - [⏱️] Poder iniciar sesión con una cuenta existente
-    - [] Poder cerrar sesión
-    - [] Poder editar la cuenta de usuario
+    - [✅] Poder iniciar sesión con una cuenta existente
+    - [✅] Poder editar la cuenta de usuario
+    - [] Poder cambiar la foto de perfil
     - [] Poder eliminar la cuenta de usuario
+    - [] Poder cerrar sesión
   - Productos
     - [] Poder crear un nuevo producto
     - [] Poder editar un producto existente
