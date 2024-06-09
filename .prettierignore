@@ -1,0 +1,17 @@
+node_modules
+prisma
+build
+coverage
+
+tsconfig.json
+tsconfig.build.json
+
+.env
+
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+package.json
+
+docker-compose.yml
