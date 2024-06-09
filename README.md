@@ -1,8 +1,6 @@
 # Go shopping 🛒
 
-Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones, mostrando mis habilidades en el desarrollo backend. 🙃
-
-## Tecnologías utilizadas
+![Imagen de inicio](./illustration.png)
 
 <div align="center">
 
@@ -14,6 +12,8 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
   ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white)
 
 </div>
+
+Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones, mostrando mis habilidades en el desarrollo backend. 🙃
 
 ## Características
 
