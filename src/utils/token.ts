@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { JWT_SECRET } from '../utils/environments'
 
 export const generateToken = (id: number) => {
@@ -7,4 +7,14 @@ export const generateToken = (id: number) => {
   })
 
   return token
+}
+
+export const validateToken = (token: string) => {
+  try {
+    jwt.verify(token, JWT_SECRET as jwt.Secret) as JwtPayload
+
+    return { error: false }
+  } catch (error) {
+    return { message: 'Token inválido.', error: true }
+  }
 }
