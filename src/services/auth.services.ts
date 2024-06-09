@@ -5,6 +5,20 @@ import { generateToken } from '../utils/token'
 
 export const register = async (user: CreateUserDto) => {
   try {
+    const emailExists = await prisma.user.findUnique({
+      where: {
+        email: user.email,
+      },
+    })
+
+    if (emailExists) {
+      return {
+        message: 'Email already exists',
+        status: 400,
+        error: true,
+      }
+    }
+
     const encryptedPassword = await encryptPassword(user.password)
 
     await prisma.image.create({
@@ -66,24 +80,6 @@ export const logIn = async (user: LoginUserDto) => {
         user: userFound,
       },
     }
-  } catch (error) {
-    console.error(error)
-    return { message: 'Error validating user', status: 500, error: true }
-  }
-}
-
-export const emailExists = async (email: string) => {
-  try {
-    const userFound = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    })
-
-    if (userFound)
-      return { message: 'Email already exists', status: 409, error: true }
-
-    return { message: 'Email available', status: 200, error: false }
   } catch (error) {
     console.error(error)
     return { message: 'Error validating user', status: 500, error: true }
