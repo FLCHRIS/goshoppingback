@@ -19,12 +19,6 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'Email is not valid' })
   }
 
-  const emailFound = await authServices.emailExists(user.email)
-
-  if (emailFound.error) {
-    return res.status(emailFound.status).json({ message: emailFound.message })
-  }
-
   const userCreated = await authServices.register(user)
 
   if (userCreated.error) {
