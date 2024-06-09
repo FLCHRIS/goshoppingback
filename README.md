@@ -126,3 +126,18 @@ Modelos:
     - `productId`: Int (Foreign Key, referencia al producto)
     - `quantity`: Int (Cantidad de ese producto en el pedido)
     - `price`: Float (Precio del producto en el momento de la compra)
+
+
+```
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+DATABASE_URL="mysql://root:1234@localhost:3306/goshopping"
+JWT_SECRET="7li?HiEmWLSg-PEF"
+```
+
+docker-compose up
+docker exec -it bb1 mysql -u root -p
