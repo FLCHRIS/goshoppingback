@@ -1,11 +1,11 @@
-import prisma from "../database";
-import { encryptPassword, decryptPassword } from "../utils/encryption";
-import { CreateUserDto, LoginUserDto } from "../dto/auth.dto";
-import { generateToken } from "../utils/token";
+import prisma from '../database'
+import { encryptPassword, decryptPassword } from '../utils/encryption'
+import { CreateUserDto, LoginUserDto } from '../dto/auth.dto'
+import { generateToken } from '../utils/token'
 
 export const register = async (user: CreateUserDto) => {
   try {
-    const encryptedPassword = await encryptPassword(user.password);
+    const encryptedPassword = await encryptPassword(user.password)
 
     await prisma.image.create({
       data: {
@@ -20,18 +20,18 @@ export const register = async (user: CreateUserDto) => {
       include: {
         user: true,
       },
-    });
+    })
 
     return {
-      message: "User registered successfully",
+      message: 'User registered successfully',
       status: 201,
       error: false,
-    };
+    }
   } catch (error) {
-    console.error(error);
-    return { message: "Error registering user", status: 500, error: true };
+    console.error(error)
+    return { message: 'Error registering user', status: 500, error: true }
   }
-};
+}
 
 export const logIn = async (user: LoginUserDto) => {
   try {
@@ -42,35 +42,35 @@ export const logIn = async (user: LoginUserDto) => {
       include: {
         image: true,
       },
-    });
+    })
 
     if (!userFound)
-      return { message: "User not found", status: 404, error: true };
+      return { message: 'User not found', status: 404, error: true }
 
     const passwordMatch = await decryptPassword(
       user.password,
-      userFound.password
-    );
+      userFound.password,
+    )
 
     if (!passwordMatch)
-      return { message: "Password incorrect", status: 401, error: true };
+      return { message: 'Password incorrect', status: 401, error: true }
 
-    const token = generateToken(userFound.id);
+    const token = generateToken(userFound.id)
 
     return {
-      message: "User logged in successfully",
+      message: 'User logged in successfully',
       status: 200,
       error: false,
       data: {
         token,
         user: userFound,
       },
-    };
+    }
   } catch (error) {
-    console.error(error);
-    return { message: "Error validating user", status: 500, error: true };
+    console.error(error)
+    return { message: 'Error validating user', status: 500, error: true }
   }
-};
+}
 
 export const emailExists = async (email: string) => {
   try {
@@ -78,14 +78,14 @@ export const emailExists = async (email: string) => {
       where: {
         email,
       },
-    });
+    })
 
     if (userFound)
-      return { message: "Email already exists", status: 409, error: true };
+      return { message: 'Email already exists', status: 409, error: true }
 
-    return { message: "Email available", status: 200, error: false };
+    return { message: 'Email available', status: 200, error: false }
   } catch (error) {
-    console.error(error);
-    return { message: "Error validating user", status: 500, error: true };
+    console.error(error)
+    return { message: 'Error validating user', status: 500, error: true }
   }
-};
+}
