@@ -1,57 +1,55 @@
-import { Request, Response } from "express";
-import { CreateUserDto, LoginUserDto } from "../dto/auth.dto";
-import { isEmpty, isValidEmail } from "../utils/validations";
-import * as authServices from "../services/auth.services";
+import { Request, Response } from 'express'
+import { CreateUserDto, LoginUserDto } from '../dto/auth.dto'
+import { isEmpty, isValidEmail } from '../utils/validations'
+import * as authServices from '../services/auth.services'
 
 export const register = async (req: Request, res: Response) => {
-  const user = req.body as CreateUserDto;
+  const user = req.body as CreateUserDto
 
   if (isEmpty(user.email)) {
-    return res.status(400).json({ message: "Email is required" });
+    return res.status(400).json({ message: 'Email is required' })
   }
   if (isEmpty(user.userName)) {
-    return res.status(400).json({ message: "UserName is required" });
+    return res.status(400).json({ message: 'UserName is required' })
   }
   if (isEmpty(user.password)) {
-    return res.status(400).json({ message: "Password is required" });
+    return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
-    return res.status(400).json({ message: "Email is not valid" });
+    return res.status(400).json({ message: 'Email is not valid' })
   }
 
-  const emailFound = await authServices.emailExists(user.email);
+  const emailFound = await authServices.emailExists(user.email)
 
   if (emailFound.error) {
-    return res.status(emailFound.status).json({ message: emailFound.message });
+    return res.status(emailFound.status).json({ message: emailFound.message })
   }
 
-  const userCreated = await authServices.register(user);
+  const userCreated = await authServices.register(user)
 
   if (userCreated.error) {
-    return res
-      .status(userCreated.status)
-      .json({ message: userCreated.message });
+    return res.status(userCreated.status).json({ message: userCreated.message })
   }
 
-  return res.status(userCreated.status).json({ message: userCreated.message });
-};
+  return res.status(userCreated.status).json({ message: userCreated.message })
+}
 
 export const logIn = async (req: Request, res: Response) => {
-  const user = req.body as LoginUserDto;
+  const user = req.body as LoginUserDto
 
   if (isEmpty(user.email)) {
-    return res.status(400).json({ message: "Email is required" });
+    return res.status(400).json({ message: 'Email is required' })
   }
   if (isEmpty(user.password)) {
-    return res.status(400).json({ message: "Password is required" });
+    return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
-    return res.status(400).json({ message: "Email is not valid" });
+    return res.status(400).json({ message: 'Email is not valid' })
   }
 
-  const { error, message, status, data } = await authServices.logIn(user);
+  const { error, message, status, data } = await authServices.logIn(user)
 
-  if (error) return res.status(status).json({ message });
+  if (error) return res.status(status).json({ message })
 
-  return res.status(status).json({ message, data });
-};
+  return res.status(status).json({ message, data })
+}
