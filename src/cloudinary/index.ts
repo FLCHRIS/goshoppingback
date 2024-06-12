@@ -17,3 +17,7 @@ export const uploadImage = async (filePath: string, folder: string) => {
     folder: `goshopping/${folder}`,
   })
 }
+
+export const deleteImage = async (publicId: string) => {
+  return await cloudinary.uploader.destroy(publicId)
+}
