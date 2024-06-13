@@ -123,6 +123,23 @@ fetch(`http://127.0.0.1:3000/api/users/${userId}/photo`, {
   .catch((error) => console.error('Error:', error))
 ```
 
+#### Endpoint de eliminar usuario
+
+[DELETE] `http://127.0.0.1:3000/api/users/{userId}`
+
+```javascript
+fetch('http://127.0.0.1:3000/api/users/{userId}', {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ...',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
 ## Requerimientos:
 
 - Cuenta de usuario
@@ -130,7 +147,7 @@ fetch(`http://127.0.0.1:3000/api/users/${userId}/photo`, {
   - [✅] Poder iniciar sesión con una cuenta existente
   - [✅] Poder editar la cuenta de usuario
   - [✅] Poder cambiar la foto de perfil
-  - [] Poder eliminar la cuenta de usuario
+  - [✅] Poder eliminar la cuenta de usuario
   - [] Poder cerrar sesión
 - Productos
   - [] Poder crear un nuevo producto
@@ -164,7 +181,7 @@ Modelos:
   - `email`: String (Not Null) ✅
   - `createdAt`: DateTime ✅
   - `updatedAt`: DateTime ✅
-  - `imageId`: Int (Foreign Key, referencia a la tabla de imágenes)
+  - `imageId`: Int (Foreign Key, referencia a la tabla de imágenes) ✅
   - `cards`: List<Card> (Relación uno a muchos con tarjetas)
   - `favorites`: List<Favorito> (Relación uno a muchos con favoritos)
   - `carts`: List<Carrito> (Relación uno a muchos con carritos)
