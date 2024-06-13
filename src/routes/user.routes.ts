@@ -13,5 +13,6 @@ router.patch(
   fileUpload({ useTempFiles: true, tempFileDir: './uploads' }),
   userController.editPhoto,
 )
+router.delete('/:id', verifyToken, userController.deleteUser)
 
 export default router
