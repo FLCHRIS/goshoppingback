@@ -37,3 +37,13 @@ export const editPhoto = async (req: Request, res: Response) => {
 
   return res.status(status).json({ message, data })
 }
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
+
+  const { message, status } = await userService.deleteUser(Number(id))
+
+  return res.status(status).json({ message })
+}
