@@ -95,3 +95,45 @@ export const editPhoto = async (id: number, imageUrl: string) => {
     return { message: 'Error editing user photo', status: 500, error: true }
   }
 }
+
+export const deleteUser = async (id: number) => {
+  try {
+    const userFound = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (!userFound) {
+      return { message: 'User not found', status: 404, error: true }
+    }
+
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    })
+
+    await prisma.image.delete({
+      where: {
+        id: userFound.imageId,
+      },
+    })
+
+    if (userFound.image !== null && userFound.image.publicId) {
+      await deleteImage(userFound.image.publicId)
+    }
+
+    return {
+      message: 'User deleted successfully',
+      status: 200,
+      error: false,
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error deleting user', status: 500, error: true }
+  }
+}
