@@ -15,6 +15,18 @@
 
 Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones, mostrando mis habilidades en el desarrollo backend. 🙃
 
+## Indice
+
+- [Características](#características)
+- [Endpoints](#endpoints)
+  - [Módulo de Autenticación ](#módulo-de-autenticación)
+    - [Endpoint de Registro](#endpoint-de-registro)
+    - [Endpoint de Inicio de sesión](#endpoint-de-inicio-de-sesión)
+  - [Módulo de Usuarios](#módulo-de-usuarios)
+    - [Endpoint de editar usuario](#endpoint-de-editar-usuario)
+    - [Endpoint de editar foto de perfil](#endpoint-de-editar-foto-de-perfil)
+    - [Endpoint de eliminar usuario](#endpoint-de-eliminar-usuario)
+
 ## Características
 
 - **Gestión de Usuarios**: Registro, autenticación, edición y eliminación de usuarios.
