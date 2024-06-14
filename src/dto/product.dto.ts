@@ -3,5 +3,6 @@ export interface CreateProductDto {
   description: string
   price: number
   categoryId: number
+  userId: number
   stock: number
 }
