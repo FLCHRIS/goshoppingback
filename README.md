@@ -199,15 +199,15 @@ Modelos:
   - `carts`: List<Carrito> (Relación uno a muchos con carritos)
   - `orders`: List<Order> (Relación uno a muchos con pedidos)
 - Productos:
-  - `id`: Int (Primary Key)
-  - `name`: String (Not Null)
-  - `description`: String
-  - `price`: Float
-  - `createdAt`: DateTime
-  - `category`: String
-  - `stock`: Int
-  - `userId`: Int (Foreign Key, referencia al usuario que publicó el producto)
-  - `imageId`: Int (Foreign Key, referencia a la tabla de imágenes)
+  - `id`: Int (Primary Key) ✅
+  - `name`: String (Not Null) ✅
+  - `description`: String ✅
+  - `price`: Float ✅
+  - `createdAt`: DateTime ✅
+  - `category`: String ✅
+  - `stock`: Int ✅
+  - `userId`: Int (Foreign Key, referencia al usuario que publicó el producto) ✅
+  - `imageId`: Int (Foreign Key, referencia a la tabla de imágenes) ✅
 - Carrito:
   - `id`: Int (Primary Key)
   - `createdAt`: DateTime
