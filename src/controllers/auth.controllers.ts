@@ -1,18 +1,18 @@
 import { Request, Response } from 'express'
 import { CreateUserDto, LoginUserDto } from '../dto/auth.dto'
-import { isEmpty, isValidEmail } from '../utils/validations'
+import { isEmptyString, isValidEmail } from '../utils/validations'
 import * as authServices from '../services/auth.services'
 
 export const register = async (req: Request, res: Response) => {
   const user = req.body as CreateUserDto
 
-  if (isEmpty(user.email)) {
+  if (isEmptyString(user.email)) {
     return res.status(400).json({ message: 'Email is required' })
   }
-  if (isEmpty(user.userName)) {
+  if (isEmptyString(user.userName)) {
     return res.status(400).json({ message: 'UserName is required' })
   }
-  if (isEmpty(user.password)) {
+  if (isEmptyString(user.password)) {
     return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
@@ -31,10 +31,10 @@ export const register = async (req: Request, res: Response) => {
 export const logIn = async (req: Request, res: Response) => {
   const user = req.body as LoginUserDto
 
-  if (isEmpty(user.email)) {
+  if (isEmptyString(user.email)) {
     return res.status(400).json({ message: 'Email is required' })
   }
-  if (isEmpty(user.password)) {
+  if (isEmptyString(user.password)) {
     return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
