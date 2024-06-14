@@ -6,11 +6,10 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
-    "build": "tsc",
-    "test": "jest"
+    "build": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "Christian FL",
   "license": "ISC",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
