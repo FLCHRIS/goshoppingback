@@ -13,13 +13,14 @@
 
 </div>
 
-Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones, mostrando mis habilidades en el desarrollo backend. 🙃
+Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones.
 
 ## Indice
 
 - [Características](#características)
 - [Requisitos](#requisitos)
 - [Variables de entorno](#variables-de-entorno)
+- [Instalación](#instalación)
 - [Endpoints](#endpoints)
   - [Módulo de Autenticación ](#módulo-de-autenticación)
     - [Endpoint de registro](#endpoint-de-registro)
@@ -44,8 +45,9 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
 
 ## Requisitos
 
-Para poder ejecutar el proyecto es necesario tener: 
-- Una cuenta de [**Cloudinary**](https://cloudinary.com/) esta misma para poder subir las imagenes de los productos y de los usuarios. 🙃
+Para poder ejecutar el proyecto es necesario tener:
+
+- Una cuenta de [**Cloudinary**](https://cloudinary.com/) esta misma para poder subir las imagenes de los productos y de los usuarios.
 - Tener instalado [**Node.js**](https://nodejs.org/en/).
 - Tener instalado [**MySQL**](https://www.mysql.com/).
 
@@ -53,11 +55,55 @@ Para poder ejecutar el proyecto es necesario tener:
 
 Las variables de entorno que utiliza el proyecto para poder ejecutarse son las siguientes:
 
+- `DATABASE_URL="mysql://your_user:your_password@localhost:3306/goshopping"`: URL de la base de datos.
 - `PORT`: Puerto de escucha del servidor. Por defecto es **3000**.
 - `JWT_SECRET`: Clave secreta del token.
 - `CLOUDINARY_CLOUD_NAME`: Nombre de la nube de Cloudinary.
 - `CLOUDINARY_API_KEY`: Clave de la nube de Cloudinary.
 - `CLOUDINARY_API_SECRET`: Clave secreta de la nube de Cloudinary.
+
+## Instalación
+
+1. Primero clona el proyecto en tu computadora:
+   ```shell
+   $ git clone https://github.com/FLCHRIS/goshoppingback.git
+   ```
+2. Luego instala las dependencias:
+   ```shell
+   $ cd goshoppingback
+   $ pnpm install # O npm install
+   ```
+3. Generar las migraciones de la base de datos con **Prisma**:
+
+    Después de instalar las dependencias, necesitarás generar las migraciones de base de datos que reflejan los modelos definidos en el archivo `./prisma/schema.prisma`.
+
+    Para generar las migraciones haz el siguiente comando:
+
+    ```shell
+    $ pnpm prisma migrate dev --name init
+    ```
+4. Aplicar las migraciones a tu base de datos:
+
+    Una vez que hayas generado las migraciones, necesitas aplicarlas a tu base de datos.
+
+    Para aplicar la migración a tu base de datos, ejecuta el siguiente comando:
+
+    ```shell
+    $ pnpm prisma migrate deploy
+    ```
+5. Ejecutar el servidor:
+
+    Si no hubo errores al hacer las migraciones, puedes ejecutar el servidor.
+
+    Para iniciar el servidor, ejecuta el siguiente comando:
+
+    ```shell
+    $ pnpm run dev
+    ```
+
+Eso sería todo el proceso de instalación y ejecución del proyecto. 
+
+**HAPPY CODING** 👻
 
 ## Endpoints
 
@@ -336,6 +382,9 @@ Modelos:
 
 DATABASE_URL="mysql://root:1234@localhost:3306/goshopping"
 JWT_SECRET="7li?HiEmWLSg-PEF"
+CLOUDINARY_CLOUD_NAME=""
+CLOUDINARY_API_KEY=""
+CLOUDINARY_API_SECRET=""
 ```
 
 docker-compose up
