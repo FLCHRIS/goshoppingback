@@ -41,9 +41,23 @@ export const logIn = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'Email is not valid' })
   }
 
-  const { error, message, status, data } = await authServices.logIn(user)
+  const { error, message, status, token, data } = await authServices.logIn(user)
 
   if (error) return res.status(status).json({ message })
 
-  return res.status(status).json({ message, data })
+  return res
+    .status(status)
+    .cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: 86400,
+    })
+    .json({ message, data })
+}
+
+export const logOut = async (req: Request, res: Response) => {
+  return res
+    .status(200)
+    .clearCookie('token')
+    .json({ message: 'Logged out successfully' })
 }
