@@ -18,6 +18,8 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
 ## Indice
 
 - [Características](#características)
+- [Requisitos](#requisitos)
+- [Variables de entorno](#variables-de-entorno)
 - [Endpoints](#endpoints)
   - [Módulo de Autenticación ](#módulo-de-autenticación)
     - [Endpoint de registro](#endpoint-de-registro)
@@ -39,6 +41,23 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
 - **Ventas**: Realización de ventas y gestión de pedidos.
 - **Búsquedas**: Búsqueda de productos por nombre y categoría.
 - **Subida de Imágenes**: Manejo de imágenes de productos.
+
+## Requisitos
+
+Para poder ejecutar el proyecto es necesario tener: 
+- Una cuenta de [**Cloudinary**](https://cloudinary.com/) esta misma para poder subir las imagenes de los productos y de los usuarios. 🙃
+- Tener instalado [**Node.js**](https://nodejs.org/en/).
+- Tener instalado [**MySQL**](https://www.mysql.com/).
+
+## Variables de entorno
+
+Las variables de entorno que utiliza el proyecto para poder ejecutarse son las siguientes:
+
+- `PORT`: Puerto de escucha del servidor. Por defecto es **3000**.
+- `JWT_SECRET`: Clave para cifrar las contraseñas de los usuarios.
+- `CLOUDINARY_CLOUD_NAME`: Nombre de la nube de Cloudinary.
+- `CLOUDINARY_API_KEY`: Clave de la nube de Cloudinary.
+- `CLOUDINARY_API_SECRET`: Clave secreta de la nube de Cloudinary.
 
 ## Endpoints
 
