@@ -7,7 +7,7 @@ import * as productController from '../controllers/product.controllers'
 const router = Router()
 
 router.post(
-  '/:userId',
+  '/',
   verifyToken,
   fileUpload({ useTempFiles: true, tempFileDir: './uploads' }),
   productController.createProduct,
