@@ -152,6 +152,39 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
   .catch((error) => console.error('Error:', error))
 ```
 
+### Módulo de Productos
+
+RUTA: `/api/products`
+
+#### Endpoint de crear nuevo producto
+
+[POST] `http://127.0.0.1:3000/api/products`
+
+```javascript
+const fileInput = document.getElementById('...')
+const file = fileInput.files[0]
+
+const formData = new FormData()
+formData.append('name', '...')
+formData.append('description', '...')
+formData.append('price', '...')
+formData.append('categoryId', '...')
+formData.append('userId', '...')
+formData.append('stock', '...')
+formData.append('image', file)
+
+fetch(`http://127.0.0.1:3000/api/products`, {
+  method: 'POST',
+  headers: {
+    Authorization: 'Bearer ...',
+  },
+  body: formData,
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
 ## Requerimientos:
 
 - Cuenta de usuario
@@ -162,7 +195,7 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
   - [✅] Poder eliminar la cuenta de usuario
   - [] Poder cerrar sesión
 - Productos
-  - [] Poder crear un nuevo producto
+  - [✅] Poder crear un nuevo producto
   - [] Poder editar un producto existente
   - [] Poder eliminar un producto existente
   - [] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
@@ -198,7 +231,7 @@ Modelos:
   - `favorites`: List<Favorito> (Relación uno a muchos con favoritos)
   - `carts`: List<Carrito> (Relación uno a muchos con carritos)
   - `orders`: List<Order> (Relación uno a muchos con pedidos)
-- Productos:
+- Productos: ✅
   - `id`: Int (Primary Key) ✅
   - `name`: String (Not Null) ✅
   - `description`: String ✅
