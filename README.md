@@ -54,7 +54,7 @@ Para poder ejecutar el proyecto es necesario tener:
 Las variables de entorno que utiliza el proyecto para poder ejecutarse son las siguientes:
 
 - `PORT`: Puerto de escucha del servidor. Por defecto es **3000**.
-- `JWT_SECRET`: Clave para cifrar las contraseñas de los usuarios.
+- `JWT_SECRET`: Clave secreta del token.
 - `CLOUDINARY_CLOUD_NAME`: Nombre de la nube de Cloudinary.
 - `CLOUDINARY_API_KEY`: Clave de la nube de Cloudinary.
 - `CLOUDINARY_API_SECRET`: Clave secreta de la nube de Cloudinary.
