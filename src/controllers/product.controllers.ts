@@ -13,11 +13,7 @@ import * as productService from '../services/product.services'
 export const createProduct = async (req: Request, res: Response) => {
   const image = req.files?.image as fileUpload.UploadedFile
   const product = req.body as CreateProductDto
-  const { userId } = req.params
 
-  if (!isNumber(userId)) {
-    return res.status(400).json({ message: 'Id is not valid' })
-  }
   if (isEmptyString(product.name)) {
     return res.status(400).json({ message: 'Name is required' })
   }
@@ -35,6 +31,9 @@ export const createProduct = async (req: Request, res: Response) => {
   if (isEmptyNumber(product.categoryId)) {
     return res.status(400).json({ message: 'CategoryId is required' })
   }
+  if (isEmptyNumber(product.userId)) {
+    return res.status(400).json({ message: 'UserId is required' })
+  }
   if (isEmptyNumber(product.stock)) {
     return res.status(400).json({ message: 'Stock is required' })
   }
@@ -49,7 +48,6 @@ export const createProduct = async (req: Request, res: Response) => {
 
   const { error, message, status, data } = await productService.createProduct(
     product,
-    Number(userId),
     image.tempFilePath,
   )
 
