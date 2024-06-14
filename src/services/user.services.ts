@@ -65,13 +65,14 @@ export const editPhoto = async (id: number, imageUrl: string) => {
       await deleteImage(userFound.image.publicId)
     }
 
-    await prisma.image.update({
+    await prisma.imageUser.update({
       where: {
-        id: userFound.imageId,
+        id: userFound.image?.id,
       },
       data: {
         publicId: public_id,
         url: secure_url,
+        updatedAt: new Date(),
       },
     })
 
@@ -114,12 +115,6 @@ export const deleteUser = async (id: number) => {
     await prisma.user.delete({
       where: {
         id,
-      },
-    })
-
-    await prisma.image.delete({
-      where: {
-        id: userFound.imageId,
       },
     })
 
