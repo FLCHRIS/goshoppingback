@@ -5,13 +5,12 @@ import { deleteTempFile } from '../utils/tempFiles'
 
 export const createProduct = async (
   product: CreateProductDto,
-  userId: number,
   imageUrl: string,
 ) => {
   try {
     const userFound = await prisma.user.findUnique({
       where: {
-        id: userId,
+        id: Number(product.userId),
       },
       include: {
         image: true,
@@ -40,7 +39,7 @@ export const createProduct = async (
         },
         user: {
           connect: {
-            id: userId,
+            id: Number(product.userId),
           },
         },
         category: {
