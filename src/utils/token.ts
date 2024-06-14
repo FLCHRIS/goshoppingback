@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { JWT_SECRET } from '../utils/environments'
 
 export const generateToken = (id: number) => {
+  const JWT_SECRET = process.env.JWT_SECRET
   const token = jwt.sign({ id }, JWT_SECRET as jwt.Secret, {
     expiresIn: 86400,
   })
@@ -10,6 +10,7 @@ export const generateToken = (id: number) => {
 }
 
 export const validateToken = (token: string) => {
+  const JWT_SECRET = process.env.JWT_SECRET
   try {
     jwt.verify(token, JWT_SECRET as jwt.Secret) as JwtPayload
 
