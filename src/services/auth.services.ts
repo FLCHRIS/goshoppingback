@@ -75,8 +75,8 @@ export const logIn = async (user: LoginUserDto) => {
       message: 'User logged in successfully',
       status: 200,
       error: false,
+      token,
       data: {
-        token,
         user: userFound,
       },
     }
