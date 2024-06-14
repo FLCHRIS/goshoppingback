@@ -70,6 +70,8 @@ RUTA: `/api/auth/login`
 
 [POST] `http://127.0.0.1:3000/api/auth/login`
 
+> Te enviará una cookie, con el token de inicio de sesión. Y así poder realizar modificaciones en tu cuenta.
+
 ```javascript
 fetch('http://127.0.0.1:3000/api/auth/login', {
   method: 'POST',
@@ -80,6 +82,23 @@ fetch('http://127.0.0.1:3000/api/auth/login', {
     email: '...',
     password: '...',
   }),
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
+#### Endpoint de Cierre de sesión
+
+[POST] `http://127.0.0.1:3000/api/auth/logout`
+
+```javascript
+fetch('http://127.0.0.1:3000/api/auth/logout', {
+  method: 'POST',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
   .then((response) => response.json())
   .then((data) => console.log(data))
@@ -97,9 +116,9 @@ RUTA: `/api/users`
 ```javascript
 fetch('http://127.0.0.1:3000/api/users/{userId}', {
   method: 'PATCH',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer ...',
   },
   body: JSON.stringify({
     userName: '...',
@@ -125,9 +144,7 @@ formData.append('image', file)
 
 fetch(`http://127.0.0.1:3000/api/users/${userId}/photo`, {
   method: 'PATCH',
-  headers: {
-    Authorization: 'Bearer ...',
-  },
+  credentials: 'include',
   body: formData,
 })
   .then((response) => response.json())
@@ -142,9 +159,9 @@ fetch(`http://127.0.0.1:3000/api/users/${userId}/photo`, {
 ```javascript
 fetch('http://127.0.0.1:3000/api/users/{userId}', {
   method: 'DELETE',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer ...',
   },
 })
   .then((response) => response.json())
@@ -175,9 +192,7 @@ formData.append('image', file)
 
 fetch(`http://127.0.0.1:3000/api/products`, {
   method: 'POST',
-  headers: {
-    Authorization: 'Bearer ...',
-  },
+  credentials: 'include',
   body: formData,
 })
   .then((response) => response.json())
@@ -193,7 +208,7 @@ fetch(`http://127.0.0.1:3000/api/products`, {
   - [✅] Poder editar la cuenta de usuario
   - [✅] Poder cambiar la foto de perfil
   - [✅] Poder eliminar la cuenta de usuario
-  - [] Poder cerrar sesión
+  - [✅] Poder cerrar sesión
 - Productos
   - [✅] Poder crear un nuevo producto
   - [] Poder editar un producto existente
