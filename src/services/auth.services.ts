@@ -21,18 +21,14 @@ export const register = async (user: CreateUserDto) => {
 
     const encryptedPassword = await encryptPassword(user.password)
 
-    await prisma.image.create({
+    await prisma.user.create({
       data: {
-        user: {
-          create: {
-            email: user.email,
-            userName: user.userName,
-            password: encryptedPassword,
-          },
+        email: user.email,
+        userName: user.userName,
+        password: encryptedPassword,
+        image: {
+          create: {},
         },
-      },
-      include: {
-        user: true,
       },
     })
 
@@ -68,7 +64,7 @@ export const logIn = async (user: LoginUserDto) => {
 
     if (!passwordMatch)
       return { message: 'Password incorrect', status: 401, error: true }
-
+    
     const token = generateToken(userFound.id)
 
     return {
