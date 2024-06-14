@@ -3,7 +3,6 @@ import fileUpload from 'express-fileupload'
 
 import { CreateProductDto } from '../dto/product.dto'
 import {
-  isNumber,
   isEmptyString,
   isEmptyNumber,
   isPositiveNumber,
