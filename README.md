@@ -20,12 +20,15 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
 - [Características](#características)
 - [Endpoints](#endpoints)
   - [Módulo de Autenticación ](#módulo-de-autenticación)
-    - [Endpoint de Registro](#endpoint-de-registro)
-    - [Endpoint de Inicio de sesión](#endpoint-de-inicio-de-sesión)
+    - [Endpoint de registro](#endpoint-de-registro)
+    - [Endpoint de inicio de sesión](#endpoint-de-inicio-de-sesión)
+    - [Endpoint de cerrar sesión](#endpoint-de-cierre-de-sesión)
   - [Módulo de Usuarios](#módulo-de-usuarios)
     - [Endpoint de editar usuario](#endpoint-de-editar-usuario)
     - [Endpoint de editar foto de perfil](#endpoint-de-editar-foto-de-perfil)
     - [Endpoint de eliminar usuario](#endpoint-de-eliminar-usuario)
+  - [Módulo de Productos](#módulo-de-productos)
+    - [Endpoint de crear producto](#endpoint-de-crear-producto)
 
 ## Características
 
@@ -173,7 +176,7 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
 
 RUTA: `/api/products`
 
-#### Endpoint de crear nuevo producto
+#### Endpoint de crear producto
 
 [POST] `http://127.0.0.1:3000/api/products`
 
