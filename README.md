@@ -268,6 +268,25 @@ fetch(`http://127.0.0.1:3000/api/products`, {
   .catch((error) => console.error('Error:', error))
 ```
 
+#### Endpoint de editar producto
+
+#### Endpoint de eliminar producto
+
+[DELETE] `http://127.0.0.1:3000/api/products/{productId}`
+
+```javascript
+fetch('http://127.0.0.1:3000/api/products/{productId}', {
+  method: 'DELETE',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
 ## Requerimientos:
 
 - Cuenta de usuario
@@ -280,7 +299,7 @@ fetch(`http://127.0.0.1:3000/api/products`, {
 - Productos
   - [✅] Poder crear un nuevo producto
   - [] Poder editar un producto existente
-  - [] Poder eliminar un producto existente
+  - [✅] Poder eliminar un producto existente
   - [] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
 - Carrito de compras
   - [] Poder agregar productos al carrito
