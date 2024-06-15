@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import fileUpload from 'express-fileupload'
 
-import { CreateProductDto } from '../dto/product.dto'
+import { CreateProductDto, EditProductDto } from '../dto/product.dto'
 import {
   isEmptyString,
   isEmptyNumber,
@@ -48,6 +48,39 @@ export const createProduct = async (req: Request, res: Response) => {
 
   const { error, message, status, data } = await productService.createProduct(
     product,
+    image.tempFilePath,
+  )
+
+  if (error) return res.status(status).json({ message })
+
+  return res.status(status).json({ message, data })
+}
+
+export const editProduct = async (req: Request, res: Response) => {
+  const product = req.body as EditProductDto
+  const { id } = req.params
+
+  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
+
+  const { error, message, status, data } = await productService.editProduct(
+    product,
+    Number(id),
+  )
+
+  if (error) return res.status(status).json({ message })
+
+  return res.status(status).json({ message, data })
+}
+
+export const editPhoto = async (req: Request, res: Response) => {
+  const { id } = req.params
+  const image = req.files?.image as fileUpload.UploadedFile
+
+  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
+  if (!image) return res.status(400).json({ message: 'Image is required' })
+
+  const { error, message, status, data } = await productService.editPhoto(
+    Number(id),
     image.tempFilePath,
   )
 
