@@ -33,6 +33,7 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
   - [Módulo de Productos](#módulo-de-productos)
     - [Endpoint de crear producto](#endpoint-de-crear-producto)
     - [Endpoint de editar producto](#endpoint-de-editar-producto)
+    - [Endpoint de editar foto del product](#endpoint-de-editar-foto-del-producto)
     - [Endpoint de eliminar producto](#endpoint-de-eliminar-producto)
 
 ## Características
@@ -75,35 +76,38 @@ Las variables de entorno que utiliza el proyecto para poder ejecutarse son las s
    $ cd goshoppingback
    $ pnpm install # O npm install
    ```
-3. Generar las migraciones de la base de datos con **Prisma**:
+3. Después debes de crear la base de datos `goshopping`.
+4. Generar las migraciones de la base de datos con **Prisma**:
 
-    Después de instalar las dependencias, necesitarás generar las migraciones de base de datos que reflejan los modelos definidos en el archivo `./prisma/schema.prisma`.
+   Después de instalar las dependencias y haber creado la base de datos, necesitarás generar las migraciones de base de datos que reflejan los modelos definidos en el archivo `./prisma/schema.prisma`.
 
-    Para generar las migraciones haz el siguiente comando:
+   Para generar las migraciones haz el siguiente comando:
 
-    ```shell
-    $ pnpm prisma migrate dev --name init
-    ```
-4. Aplicar las migraciones a tu base de datos:
+   ```shell
+   $ pnpm prisma migrate dev --name init
+   ```
 
-    Una vez que hayas generado las migraciones, necesitas aplicarlas a tu base de datos.
+5. Aplicar las migraciones a tu base de datos:
 
-    Para aplicar la migración a tu base de datos, ejecuta el siguiente comando:
+   Una vez que hayas generado las migraciones, necesitas aplicarlas a tu base de datos.
 
-    ```shell
-    $ pnpm prisma migrate deploy
-    ```
-5. Ejecutar el servidor:
+   Para aplicar la migración a tu base de datos, ejecuta el siguiente comando:
 
-    Si no hubo errores al hacer las migraciones, puedes ejecutar el servidor.
+   ```shell
+   $ pnpm prisma migrate deploy
+   ```
 
-    Para iniciar el servidor, ejecuta el siguiente comando:
+6. Ejecutar el servidor:
 
-    ```shell
-    $ pnpm run dev
-    ```
+   Si no hubo errores al hacer las migraciones, puedes ejecutar el servidor.
 
-Eso sería todo el proceso de instalación y ejecución del proyecto. 
+   Para iniciar el servidor, ejecuta el siguiente comando:
+
+   ```shell
+   $ pnpm run dev
+   ```
+
+Eso sería todo el proceso de instalación y ejecución del proyecto.
 
 **HAPPY CODING** 👻
 
@@ -272,6 +276,50 @@ fetch(`http://127.0.0.1:3000/api/products`, {
 
 #### Endpoint de editar producto
 
+[PATCH] `http://127.0.0.1:3000/api/products/{productId}`
+
+```javascript
+fetch('http://127.0.0.1:3000/api/products/{productId}', {
+  method: 'PATCH',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: '...',
+    description: '...',
+    price: '...',
+    categoryId: '...',
+    stock: '...',
+  }),
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
+#### Endpoint de editar foto del producto
+
+[PATCH] `http://127.0.0.1:3000/api/products/{productId}/photo`
+
+```javascript
+const productId = '...'
+const fileInput = document.getElementById('...')
+const file = fileInput.files[0]
+
+const formData = new FormData()
+formData.append('image', file)
+
+fetch(`http://127.0.0.1:3000/api/products/${productId}/photo`, {
+  method: 'PATCH',
+  credentials: 'include',
+  body: formData,
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
 #### Endpoint de eliminar producto
 
 [DELETE] `http://127.0.0.1:3000/api/products/{productId}`
@@ -300,7 +348,7 @@ fetch('http://127.0.0.1:3000/api/products/{productId}', {
   - [✅] Poder cerrar sesión
 - Productos
   - [✅] Poder crear un nuevo producto
-  - [] Poder editar un producto existente
+  - [✅] Poder editar un producto existente
   - [✅] Poder eliminar un producto existente
   - [] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
 - Carrito de compras
