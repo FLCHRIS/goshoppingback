@@ -6,6 +6,7 @@ import {
   isEmptyString,
   isEmptyNumber,
   isPositiveNumber,
+  isNumber,
 } from '../utils/validations'
 import * as productService from '../services/product.services'
 
@@ -53,4 +54,14 @@ export const createProduct = async (req: Request, res: Response) => {
   if (error) return res.status(status).json({ message })
 
   return res.status(status).json({ message, data })
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
+
+  const { message, status } = await productService.deleteProduct(Number(id))
+
+  return res.status(status).json({ message })
 }
