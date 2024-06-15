@@ -34,7 +34,9 @@ export const editUser = async (user: EditUserDto, id: number) => {
       message: 'User edited successfully',
       status: 200,
       error: false,
-      data: updatedUser,
+      data: {
+        user: updatedUser,
+      },
     }
   } catch (error) {
     console.error(error)
@@ -89,7 +91,9 @@ export const editPhoto = async (id: number, imageUrl: string) => {
       message: 'User photo edited successfully',
       status: 200,
       error: false,
-      data: updatedUser,
+      data: {
+        user: updatedUser,
+      },
     }
   } catch (error) {
     console.error(error)
