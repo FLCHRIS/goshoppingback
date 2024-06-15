@@ -1,4 +1,4 @@
-import { uploadImage } from '../cloudinary'
+import { deleteImage, uploadImage } from '../cloudinary'
 import prisma from '../database'
 import { CreateProductDto } from '../dto/product.dto'
 import { deleteTempFile } from '../utils/tempFiles'
@@ -62,5 +62,41 @@ export const createProduct = async (
   } catch (error) {
     console.error(error)
     return { message: 'Error creating product', status: 500, error: true }
+  }
+}
+
+export const deleteProduct = async (id: number) => {
+  try {
+    const productFound = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (!productFound) {
+      return { message: 'Product not found', status: 404, error: true }
+    }
+
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    })
+
+    if (productFound.image !== null && productFound.image.publicId) {
+      await deleteImage(productFound.image.publicId)
+    }
+
+    return {
+      message: 'Product deleted successfully',
+      status: 200,
+      error: false,
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error deleting product', status: 500, error: true }
   }
 }
