@@ -12,5 +12,6 @@ router.post(
   fileUpload({ useTempFiles: true, tempFileDir: './uploads' }),
   productController.createProduct,
 )
+router.delete('/:id', verifyToken, productController.deleteProduct)
 
 export default router
