@@ -1,6 +1,6 @@
 import { deleteImage, uploadImage } from '../cloudinary'
 import prisma from '../database'
-import { CreateProductDto } from '../dto/product.dto'
+import { CreateProductDto, EditProductDto } from '../dto/product.dto'
 import { deleteTempFile } from '../utils/tempFiles'
 
 export const createProduct = async (
@@ -57,11 +57,112 @@ export const createProduct = async (
       message: 'Product created successfully',
       status: 200,
       error: false,
-      data: savedProduct,
+      data: {
+        product: savedProduct,
+      },
     }
   } catch (error) {
     console.error(error)
     return { message: 'Error creating product', status: 500, error: true }
+  }
+}
+
+export const editProduct = async (product: EditProductDto, id: number) => {
+  try {
+    const productFound = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (!productFound) {
+      return { message: 'Product not found', status: 404, error: true }
+    }
+
+    const updatedProduct = await prisma.product.update({
+      where: {
+        id,
+      },
+      data: {
+        updatedAt: new Date(),
+        ...product,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    return {
+      message: 'Product edited successfully',
+      status: 200,
+      error: false,
+      data: {
+        product: updatedProduct,
+      },
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error editing product', status: 500, error: true }
+  }
+}
+
+export const editPhoto = async (id: number, imageUrl: string) => {
+  try {
+    const productFound = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (!productFound) {
+      return { message: 'Product not found', status: 404, error: true }
+    }
+
+    const { public_id, secure_url } = await uploadImage(imageUrl, 'products')
+
+    await deleteTempFile(imageUrl)
+
+    if (productFound.image !== null && productFound.image.publicId) {
+      await deleteImage(productFound.image.publicId)
+    }
+
+    await prisma.imageProduct.update({
+      where: {
+        id: productFound.image?.id,
+      },
+      data: {
+        publicId: public_id,
+        url: secure_url,
+        updatedAt: new Date(),
+      },
+    })
+
+    const updatedProduct = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    return {
+      message: 'Product edited successfully',
+      status: 200,
+      error: false,
+      data: {
+        product: updatedProduct,
+      },
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error editing product photo', status: 500, error: true }
   }
 }
 
