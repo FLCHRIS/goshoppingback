@@ -32,6 +32,8 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
     - [Endpoint de eliminar usuario](#endpoint-de-eliminar-usuario)
   - [Módulo de Productos](#módulo-de-productos)
     - [Endpoint de crear producto](#endpoint-de-crear-producto)
+    - [Endpoint de editar producto](#endpoint-de-editar-producto)
+    - [Endpoint de eliminar producto](#endpoint-de-eliminar-producto)
 
 ## Características
 
