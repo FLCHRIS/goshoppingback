@@ -99,6 +99,20 @@ Las variables de entorno que utiliza el proyecto para poder ejecutarse son las s
    $ pnpm prisma migrate deploy
    ```
 
+   Después de haber aplicado las migraciones, deberás agregar valores a la tabla de `Category`, ya que es la única tabla a la que se le deben agregar valores manualmente.
+
+   Te dejo un pequeño script con algunas categorías para que puedas probar el proyecto.
+
+   ```sql
+   INSERT INTO Category (name) VALUES
+   ('Books'),
+   ('Fashion'),
+   ('Health & Beauty'),
+   ('Home & Garden'),
+   ('Sports & Outdoors'),
+   ('Technology & Electronics');
+   ```
+
 6. Ejecutar el servidor:
 
    Si no hubo errores al hacer las migraciones, puedes ejecutar el servidor.
@@ -121,7 +135,7 @@ RUTA: `/api/auth`
 
 #### Endpoint de Registro
 
-[POST] `http://127.0.0.1:3000/api/auth/register`
+[ **POST** ] `http://127.0.0.1:3000/api/auth/register`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/auth/register', {
@@ -144,7 +158,7 @@ fetch('http://127.0.0.1:3000/api/auth/register', {
 
 RUTA: `/api/auth/login`
 
-[POST] `http://127.0.0.1:3000/api/auth/login`
+[ **POST** ] `http://127.0.0.1:3000/api/auth/login`
 
 > Te enviará una cookie, con el token de inicio de sesión. Y así poder realizar modificaciones en tu cuenta.
 
@@ -166,7 +180,7 @@ fetch('http://127.0.0.1:3000/api/auth/login', {
 
 #### Endpoint de Cierre de sesión
 
-[POST] `http://127.0.0.1:3000/api/auth/logout`
+[ **POST** ] `http://127.0.0.1:3000/api/auth/logout`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/auth/logout', {
@@ -187,7 +201,7 @@ RUTA: `/api/users`
 
 #### Endpoint de editar usuario
 
-[PATCH] `http://127.0.0.1:3000/api/users/{userId}`
+[ **PATCH** ] `http://127.0.0.1:3000/api/users/{userId}`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/users/{userId}', {
@@ -208,7 +222,7 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
 
 #### Endpoint de editar foto de perfil
 
-[PATCH] `http://127.0.0.1:3000/api/users/{userId}/photo`
+[ **PATCH** ] `http://127.0.0.1:3000/api/users/{userId}/photo`
 
 ```javascript
 const userId = '...'
@@ -230,7 +244,7 @@ fetch(`http://127.0.0.1:3000/api/users/${userId}/photo`, {
 
 #### Endpoint de eliminar usuario
 
-[DELETE] `http://127.0.0.1:3000/api/users/{userId}`
+[ **DELETE** ] `http://127.0.0.1:3000/api/users/{userId}`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/users/{userId}', {
@@ -251,7 +265,7 @@ RUTA: `/api/products`
 
 #### Endpoint de obtener todos los productos
 
-[GET] `http://127.0.0.1:3000/api/products`
+[ **GET** ] `http://127.0.0.1:3000/api/products`
 
 Este endpoint permite obtener una lista de productos con la posibilidad de aplicar filtros opcionales utilizando query parameters. Los filtros disponibles son `categoryId`, `userId`, `name`, `page` y `size`.
 
@@ -275,7 +289,7 @@ Este endpoint permite obtener una lista de productos con la posibilidad de aplic
 
 #### Endpoint de obtener un producto
 
-[GET] `http://127.0.0.1:3000/api/products/{productId}`
+[ **GET** ] `http://127.0.0.1:3000/api/products/{productId}`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/products/{productId}')
@@ -286,7 +300,7 @@ fetch('http://127.0.0.1:3000/api/products/{productId}')
 
 #### Endpoint de crear producto
 
-[POST] `http://127.0.0.1:3000/api/products`
+[ **POST** ] `http://127.0.0.1:3000/api/products`
 
 ```javascript
 const fileInput = document.getElementById('...')
@@ -313,7 +327,7 @@ fetch(`http://127.0.0.1:3000/api/products`, {
 
 #### Endpoint de editar producto
 
-[PATCH] `http://127.0.0.1:3000/api/products/{productId}`
+[ **PATCH** ] `http://127.0.0.1:3000/api/products/{productId}`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/products/{productId}', {
@@ -337,7 +351,7 @@ fetch('http://127.0.0.1:3000/api/products/{productId}', {
 
 #### Endpoint de editar foto del producto
 
-[PATCH] `http://127.0.0.1:3000/api/products/{productId}/photo`
+[ **PATCH** ] `http://127.0.0.1:3000/api/products/{productId}/photo`
 
 ```javascript
 const productId = '...'
@@ -359,7 +373,7 @@ fetch(`http://127.0.0.1:3000/api/products/${productId}/photo`, {
 
 #### Endpoint de eliminar producto
 
-[DELETE] `http://127.0.0.1:3000/api/products/{productId}`
+[ **DELETE** ] `http://127.0.0.1:3000/api/products/{productId}`
 
 ```javascript
 fetch('http://127.0.0.1:3000/api/products/{productId}', {
