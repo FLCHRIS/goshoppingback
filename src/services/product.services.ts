@@ -3,6 +3,40 @@ import prisma from '../database'
 import { CreateProductDto, EditProductDto } from '../dto/product.dto'
 import { deleteTempFile } from '../utils/tempFiles'
 
+export const getProduct = async (id: number) => {
+  try {
+    const productFound = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (!productFound) {
+      return {
+        message: 'Product not found',
+        status: 404,
+        error: true,
+        data: { product: null },
+      }
+    }
+
+    return {
+      message: 'Product obtained successfully',
+      status: 200,
+      error: false,
+      data: {
+        product: productFound,
+      },
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error obtening product', status: 500, error: true }
+  }
+}
+
 export const createProduct = async (
   product: CreateProductDto,
   imageUrl: string,
