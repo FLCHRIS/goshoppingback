@@ -21,10 +21,6 @@ export const register = async (req: Request, res: Response) => {
 
   const userCreated = await authServices.register(user)
 
-  if (userCreated.error) {
-    return res.status(userCreated.status).json({ message: userCreated.message })
-  }
-
   return res.status(userCreated.status).json({ message: userCreated.message })
 }
 
