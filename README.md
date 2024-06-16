@@ -31,9 +31,10 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
     - [Endpoint de editar foto de perfil](#endpoint-de-editar-foto-de-perfil)
     - [Endpoint de eliminar usuario](#endpoint-de-eliminar-usuario)
   - [Módulo de Productos](#módulo-de-productos)
+    - [Endpoint de obtener un producto](#endpoint-de-obtener-un-producto)
     - [Endpoint de crear producto](#endpoint-de-crear-producto)
     - [Endpoint de editar producto](#endpoint-de-editar-producto)
-    - [Endpoint de editar foto del product](#endpoint-de-editar-foto-del-producto)
+    - [Endpoint de editar foto del producto](#endpoint-de-editar-foto-del-producto)
     - [Endpoint de eliminar producto](#endpoint-de-eliminar-producto)
 
 ## Características
@@ -246,6 +247,17 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
 ### Módulo de Productos
 
 RUTA: `/api/products`
+
+#### Endpoint de obtener un producto
+
+[GET] `http://127.0.0.1:3000/api/products/{productId}`
+
+```javascript
+fetch('http://127.0.0.1:3000/api/products/{productId}')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
 
 #### Endpoint de crear producto
 
