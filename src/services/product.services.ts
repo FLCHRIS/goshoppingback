@@ -1,7 +1,46 @@
 import { deleteImage, uploadImage } from '../cloudinary'
 import prisma from '../database'
 import { CreateProductDto, EditProductDto } from '../dto/product.dto'
+import { IFilters } from '../interfaces/types'
 import { deleteTempFile } from '../utils/tempFiles'
+
+export const getProducts = async (
+  filters: IFilters,
+  page: number,
+  size: number,
+) => {
+  try {
+    const skip = (page - 1) * size
+    const take = size
+
+    const products = await prisma.product.findMany({
+      skip,
+      take,
+      where: filters,
+      include: {
+        image: true,
+      }
+    })
+
+    const totalProducts = await prisma.product.count({
+      where: filters,
+    })
+
+    return {
+      message: 'Products obtained successfully',
+      status: 200,
+      error: false,
+      data: {
+        products,
+        currentPage: page,
+        totalPages: Math.ceil(totalProducts / size),
+      },
+    }
+  } catch (error) {
+    console.error(error)
+    return { message: 'Error obtaining products', status: 500, error: true }
+  }
+}
 
 export const getProduct = async (id: number) => {
   try {
