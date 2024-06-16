@@ -12,13 +12,7 @@ import * as productService from '../services/product.services'
 import { IFilters } from '../interfaces/types'
 
 export const getProducts = async (req: Request, res: Response) => {
-  const {
-    categoryId ,
-    userId,
-    name,
-    page = 1,
-    size = 10,
-  } = req.query
+  const { categoryId, userId, name, page = 1, size = 10 } = req.query
 
   const filters: IFilters = {}
 
