@@ -6,6 +6,7 @@ import * as productController from '../controllers/product.controllers'
 
 const router = Router()
 
+router.get('/:id', productController.getProduct)
 router.post(
   '/',
   verifyToken,
