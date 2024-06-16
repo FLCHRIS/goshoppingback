@@ -31,6 +31,7 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
     - [Endpoint de editar foto de perfil](#endpoint-de-editar-foto-de-perfil)
     - [Endpoint de eliminar usuario](#endpoint-de-eliminar-usuario)
   - [Módulo de Productos](#módulo-de-productos)
+    - [Endpoint de obtener todos los productos](#endpoint-de-obtener-todos-los-productos)
     - [Endpoint de obtener un producto](#endpoint-de-obtener-un-producto)
     - [Endpoint de crear producto](#endpoint-de-crear-producto)
     - [Endpoint de editar producto](#endpoint-de-editar-producto)
@@ -247,6 +248,30 @@ fetch('http://127.0.0.1:3000/api/users/{userId}', {
 ### Módulo de Productos
 
 RUTA: `/api/products`
+
+#### Endpoint de obtener todos los productos
+
+[GET] `http://127.0.0.1:3000/api/products`
+
+Este endpoint permite obtener una lista de productos con la posibilidad de aplicar filtros opcionales utilizando query parameters. Los filtros disponibles son `categoryId`, `userId`, `name`, `page` y `size`.
+
+**Query Parameters**
+
+- `categoryId` (opcional): ID de la categoría a la que pertenecen los productos.
+- `userId` (opcional): ID del usuario que creó los productos.
+- `name` (opcional): Parte del nombre de los productos a buscar, sin importar mayúsculas o minúsculas.
+- `page` (opcional): Número de la página de resultados a obtener. Por defecto es 1.
+- `size` (opcional): Tamaño de la página de resultados. Por defecto es 10.
+
+**Ejemplo con los filtros**
+
+- Obtener productos por categoría: `GET http://127.0.0.1:3000/api/products?categoryId={categoryId}`
+- Obtener productos por usuario: `GET http://127.0.0.1:3000/api/products?userId={userId}`
+- Obtener productos por nombre: `GET http://127.0.0.1:3000/api/products?name={name}`
+- Obtener productos por categoría y usuario: `GET http://127.0.0.1:3000/api/products?categoryId={categoryId}&userId={userId}`
+- Obtener productos por categoría y nombre: `GET http://127.0.0.1:3000/api/products?categoryId={categoryId}&name={name}`
+- Obtener productos con paginación: `GET http://127.0.0.1:3000/api/products?page={page}&size={size}`
+- Obtener productos por categoría con paginación: `GET http://127.0.0.1:3000/api/products?categoryId={categoryId}&page={page}&size={size}`
 
 #### Endpoint de obtener un producto
 
