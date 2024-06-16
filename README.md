@@ -387,7 +387,7 @@ fetch('http://127.0.0.1:3000/api/products/{productId}', {
   - [✅] Poder crear un nuevo producto
   - [✅] Poder editar un producto existente
   - [✅] Poder eliminar un producto existente
-  - [] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
+  - [✅] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
 - Carrito de compras
   - [] Poder agregar productos al carrito
   - [] Poder eliminar productos del carrito
