@@ -10,6 +10,20 @@ import {
 } from '../utils/validations'
 import * as productService from '../services/product.services'
 
+export const getProduct = async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
+
+  const { error, message, status, data } = await productService.getProduct(
+    Number(id),
+  )
+
+  if (error) return res.status(status).json({ message })
+
+  return res.status(status).json({ message, data })
+}
+
 export const createProduct = async (req: Request, res: Response) => {
   const image = req.files?.image as fileUpload.UploadedFile
   const product = req.body as CreateProductDto
