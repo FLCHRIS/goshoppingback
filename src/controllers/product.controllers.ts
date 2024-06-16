@@ -9,6 +9,33 @@ import {
   isNumber,
 } from '../utils/validations'
 import * as productService from '../services/product.services'
+import { IFilters } from '../interfaces/types'
+
+export const getProducts = async (req: Request, res: Response) => {
+  const {
+    categoryId ,
+    userId,
+    name,
+    page = 1,
+    size = 10,
+  } = req.query
+
+  const filters: IFilters = {}
+
+  if (categoryId !== undefined) filters['categoryId'] = Number(categoryId)
+  if (userId !== undefined) filters['userId'] = Number(userId)
+  if (name !== undefined) filters['name'] = { contains: String(name) }
+
+  const { error, message, status, data } = await productService.getProducts(
+    filters,
+    Number(page),
+    Number(size),
+  )
+
+  if (error) return res.status(status).json({ message })
+
+  return res.status(status).json({ message, data })
+}
 
 export const getProduct = async (req: Request, res: Response) => {
   const { id } = req.params
