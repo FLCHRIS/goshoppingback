@@ -18,8 +18,8 @@ export const getProducts = async (
       take,
       where: filters,
       include: {
-        image: true,
-      }
+        images: true,
+      },
     })
 
     const totalProducts = await prisma.product.count({
@@ -49,7 +49,7 @@ export const getProduct = async (id: number) => {
         id,
       },
       include: {
-        image: true,
+        images: true,
       },
     })
 
@@ -78,7 +78,7 @@ export const getProduct = async (id: number) => {
 
 export const createProduct = async (
   product: CreateProductDto,
-  imageUrl: string,
+  imageUrls: string[],
 ) => {
   try {
     const userFound = await prisma.user.findUnique({
@@ -94,9 +94,21 @@ export const createProduct = async (
       return { message: 'User not found', status: 404, error: true }
     }
 
-    const { public_id, secure_url } = await uploadImage(imageUrl, 'products')
+    const savedImages = await Promise.all(
+      imageUrls.map(async (imageUrl) => {
+        const { public_id, secure_url } = await uploadImage(
+          imageUrl,
+          'products',
+        )
 
-    await deleteTempFile(imageUrl)
+        await deleteTempFile(imageUrl)
+
+        return {
+          url: secure_url,
+          publicId: public_id,
+        }
+      }),
+    )
 
     const savedProduct = await prisma.product.create({
       data: {
@@ -104,25 +116,19 @@ export const createProduct = async (
         description: product.description,
         price: Number(product.price),
         stock: Number(product.stock),
-        image: {
-          create: {
-            url: secure_url,
-            publicId: public_id,
-          },
-        },
-        user: {
-          connect: {
-            id: Number(product.userId),
-          },
-        },
-        category: {
-          connect: {
-            id: Number(product.categoryId),
+        categoryId: Number(product.categoryId),
+        userId: Number(product.userId),
+        images: {
+          createMany: {
+            data: savedImages.map(({ publicId, url }) => ({
+              publicId,
+              url,
+            })),
           },
         },
       },
       include: {
-        image: true,
+        images: true,
       },
     })
 
@@ -147,7 +153,7 @@ export const editProduct = async (product: EditProductDto, id: number) => {
         id,
       },
       include: {
-        image: true,
+        images: true,
       },
     })
 
@@ -164,7 +170,7 @@ export const editProduct = async (product: EditProductDto, id: number) => {
         ...product,
       },
       include: {
-        image: true,
+        images: true,
       },
     })
 
@@ -182,63 +188,6 @@ export const editProduct = async (product: EditProductDto, id: number) => {
   }
 }
 
-export const editPhoto = async (id: number, imageUrl: string) => {
-  try {
-    const productFound = await prisma.product.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        image: true,
-      },
-    })
-
-    if (!productFound) {
-      return { message: 'Product not found', status: 404, error: true }
-    }
-
-    const { public_id, secure_url } = await uploadImage(imageUrl, 'products')
-
-    await deleteTempFile(imageUrl)
-
-    if (productFound.image !== null && productFound.image.publicId) {
-      await deleteImage(productFound.image.publicId)
-    }
-
-    await prisma.imageProduct.update({
-      where: {
-        id: productFound.image?.id,
-      },
-      data: {
-        publicId: public_id,
-        url: secure_url,
-        updatedAt: new Date(),
-      },
-    })
-
-    const updatedProduct = await prisma.product.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        image: true,
-      },
-    })
-
-    return {
-      message: 'Product edited successfully',
-      status: 200,
-      error: false,
-      data: {
-        product: updatedProduct,
-      },
-    }
-  } catch (error) {
-    console.error(error)
-    return { message: 'Error editing product photo', status: 500, error: true }
-  }
-}
-
 export const deleteProduct = async (id: number) => {
   try {
     const productFound = await prisma.product.findUnique({
@@ -246,7 +195,7 @@ export const deleteProduct = async (id: number) => {
         id,
       },
       include: {
-        image: true,
+        images: true,
       },
     })
 
@@ -260,8 +209,14 @@ export const deleteProduct = async (id: number) => {
       },
     })
 
-    if (productFound.image !== null && productFound.image.publicId) {
-      await deleteImage(productFound.image.publicId)
+    if (productFound.images !== null && productFound.images.length > 0) {
+      await Promise.all(
+        productFound.images.map(async (image) => {
+          if (image.publicId) {
+            await deleteImage(image.publicId)
+          }
+        })
+      )
     }
 
     return {
