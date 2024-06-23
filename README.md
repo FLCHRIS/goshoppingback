@@ -13,10 +13,16 @@
 
 </div>
 
-Este proyecto es una API de e-commerce 🛒 desarrollada en colaboración para demostrar nuestras habilidades conjuntas en la creación de APIs, gestión de bases de datos y manejo de archivos. Utilizamos diversas tecnologías y seguimos buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones de manera eficiente, reflejando nuestra capacidad de trabajar en equipo y desarrollar software de alta calidad. Puedes encontrarnos en GitHub:
+Este proyecto es una API de e-commerce 🛒 desarrollada en colaboración para demostrar nuestras habilidades conjuntas en la creación de APIs, gestión de bases de datos y manejo de archivos. Utilizamos diversas tecnologías y seguimos buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones de manera eficiente, reflejando nuestra capacidad de trabajar en equipo y desarrollar software de alta calidad.
 
-- [**Darien786** 👨‍💻](https://github.com/darien786)
-- [**FKhris.ts** 👨‍💻](https://github.com/FLCHRIS)
+Puedes encontrarnos en GitHub: 👇😉
+
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/Darien786-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/darien786)
+[![GitHub](https://img.shields.io/badge/FKhris.ts-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/FLCHRIS)
+
+</div>
 
 ## Indice
 
