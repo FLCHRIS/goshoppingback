@@ -109,11 +109,16 @@ export const deleteUser = async (id: number) => {
       },
       include: {
         image: true,
+        products: true,
       },
     })
 
     if (!userFound) {
       return { message: 'User not found', status: 404, error: true }
+    }
+
+    if (userFound.products.length > 0) {
+      return { message: 'User has products, first delete them and try again', status: 400, error: true }
     }
 
     await prisma.user.delete({
