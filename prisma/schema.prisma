@@ -42,7 +42,7 @@ model Category {
 
 model ImageProduct {
   id        Int      @id @default(autoincrement())
-  productId Int      @unique
+  productId Int
   url       String?
   publicId  String?
   createdAt DateTime @default(now())
@@ -51,16 +51,16 @@ model ImageProduct {
 }
 
 model Product {
-  id          Int           @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   userId      Int
   categoryId  Int
   name        String
-  description String        @db.Text
+  description String         @db.Text
   price       Float
   stock       Int
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  category    Category      @relation(fields: [categoryId], references: [id])
-  image       ImageProduct?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @default(now())
+  user        User           @relation(fields: [userId], references: [id])
+  category    Category       @relation(fields: [categoryId], references: [id])
+  images      ImageProduct[]
 }
