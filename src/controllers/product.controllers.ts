@@ -81,9 +81,12 @@ export const createProduct = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'Image is required' })
   }
 
-  const imagesPath: string[] = images.map(image => image.tempFilePath)
+  const imagesPath: string[] = images.map((image) => image.tempFilePath)
 
-  const {error, message, status, data} = await productService.createProduct(product, imagesPath)
+  const { error, message, status, data } = await productService.createProduct(
+    product,
+    imagesPath,
+  )
 
   if (error) return res.status(status).json({ message })
 
