@@ -13,7 +13,10 @@
 
 </div>
 
-Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis habilidades en la creación de APIs, bases de datos y manejo de archivos. Utiliza diversas tecnologías y buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones.
+Este proyecto es una API de e-commerce 🛒 desarrollada en colaboración para demostrar nuestras habilidades conjuntas en la creación de APIs, gestión de bases de datos y manejo de archivos. Utilizamos diversas tecnologías y seguimos buenas prácticas de desarrollo de software para ofrecer una solución escalable, fácil de mantener y segura. La API permite gestionar usuarios, productos, ventas y sus relaciones de manera eficiente, reflejando nuestra capacidad de trabajar en equipo y desarrollar software de alta calidad. Puedes encontrarnos en GitHub:
+
+- [**Darien786** 👨‍💻](https://github.com/darien786)
+- [**FKhris.ts** 👨‍💻](https://github.com/FLCHRIS)
 
 ## Indice
 
