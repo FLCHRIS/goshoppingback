@@ -35,7 +35,6 @@ Este proyecto es una API de **e-commerce** 🛒 diseñada para demostrar mis hab
     - [Endpoint de obtener un producto](#endpoint-de-obtener-un-producto)
     - [Endpoint de crear producto](#endpoint-de-crear-producto)
     - [Endpoint de editar producto](#endpoint-de-editar-producto)
-    - [Endpoint de editar foto del producto](#endpoint-de-editar-foto-del-producto)
     - [Endpoint de eliminar producto](#endpoint-de-eliminar-producto)
 
 ## Características
@@ -349,28 +348,6 @@ fetch('http://127.0.0.1:3000/api/products/{productId}', {
   .catch((error) => console.error('Error:', error))
 ```
 
-#### Endpoint de editar foto del producto
-
-[ **PATCH** ] `http://127.0.0.1:3000/api/products/{productId}/photo`
-
-```javascript
-const productId = '...'
-const fileInput = document.getElementById('...')
-const file = fileInput.files[0]
-
-const formData = new FormData()
-formData.append('image', file)
-
-fetch(`http://127.0.0.1:3000/api/products/${productId}/photo`, {
-  method: 'PATCH',
-  credentials: 'include',
-  body: formData,
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error('Error:', error))
-```
-
 #### Endpoint de eliminar producto
 
 [ **DELETE** ] `http://127.0.0.1:3000/api/products/{productId}`
@@ -402,6 +379,7 @@ fetch('http://127.0.0.1:3000/api/products/{productId}', {
   - [✅] Poder editar un producto existente
   - [✅] Poder eliminar un producto existente
   - [✅] Poder ver los productos del dueño vendidos, cuantos en existencia, etc.
+  - [] Poder editar las fotos de los productos
 - Carrito de compras
   - [] Poder agregar productos al carrito
   - [] Poder eliminar productos del carrito
