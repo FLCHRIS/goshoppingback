@@ -46,7 +46,7 @@ export const getProduct = async (req: Request, res: Response) => {
 }
 
 export const createProduct = async (req: Request, res: Response) => {
-  const image = req.files?.image as fileUpload.UploadedFile
+  const images = req.files?.images as fileUpload.UploadedFile[]
   const product = req.body as CreateProductDto
 
   if (isEmptyString(product.name)) {
@@ -77,14 +77,13 @@ export const createProduct = async (req: Request, res: Response) => {
       .status(400)
       .json({ message: 'Stock is not valid. It must be greater than 0' })
   }
-  if (!image) {
+  if (!images || images.length === 0) {
     return res.status(400).json({ message: 'Image is required' })
   }
 
-  const { error, message, status, data } = await productService.createProduct(
-    product,
-    image.tempFilePath,
-  )
+  const imagesPath: string[] = images.map(image => image.tempFilePath)
+
+  const {error, message, status, data} = await productService.createProduct(product, imagesPath)
 
   if (error) return res.status(status).json({ message })
 
@@ -100,23 +99,6 @@ export const editProduct = async (req: Request, res: Response) => {
   const { error, message, status, data } = await productService.editProduct(
     product,
     Number(id),
-  )
-
-  if (error) return res.status(status).json({ message })
-
-  return res.status(status).json({ message, data })
-}
-
-export const editPhoto = async (req: Request, res: Response) => {
-  const { id } = req.params
-  const image = req.files?.image as fileUpload.UploadedFile
-
-  if (!isNumber(id)) return res.status(400).json({ message: 'Id is not valid' })
-  if (!image) return res.status(400).json({ message: 'Image is required' })
-
-  const { error, message, status, data } = await productService.editPhoto(
-    Number(id),
-    image.tempFilePath,
   )
 
   if (error) return res.status(status).json({ message })
