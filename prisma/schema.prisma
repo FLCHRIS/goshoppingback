@@ -31,7 +31,7 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
   products  Product[]
-  carts     Cart[]
+  orders    Order[]
   image     ImageUser?
 }
 
@@ -64,32 +64,32 @@ model Product {
   user        User           @relation(fields: [userId], references: [id])
   category    Category       @relation(fields: [categoryId], references: [id])
   images      ImageProduct[]
-  carts       CartProduct[]
+  orderItems  OrderItem[]
 }
 
-enum CartStatus {
+enum OrderStatus {
   PENDING
   PAID
   CANCELLED
 }
 
-model Cart {
-  id        Int           @id @default(autoincrement())
-  userId    Int
-  total     Float
-  status    CartStatus    @default(PENDING)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @default(now())
-  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  products  CartProduct[]
+model Order {
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  total      Float
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  orderItems OrderItem[]
 }
 
-model CartProduct {
-  cartId    Int
+model OrderItem {
+  orderId   Int
   productId Int
   quantity  Int
-  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   product   Product @relation(fields: [productId], references: [id])
 
-  @@id([cartId, productId])
+  @@id([orderId, productId])
 }
