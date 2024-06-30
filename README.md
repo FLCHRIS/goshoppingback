@@ -97,16 +97,6 @@ Las variables de entorno que utiliza el proyecto para poder ejecutarse son las s
    $ pnpm prisma migrate dev --name init
    ```
 
-5. Aplicar las migraciones a tu base de datos:
-
-   Una vez que hayas generado las migraciones, necesitas aplicarlas a tu base de datos.
-
-   Para aplicar la migración a tu base de datos, ejecuta el siguiente comando:
-
-   ```shell
-   $ pnpm prisma migrate deploy
-   ```
-
    Después de haber aplicado las migraciones, deberás agregar valores a la tabla de `Category`, ya que es la única tabla a la que se le deben agregar valores manualmente.
 
    Te dejo un pequeño script con algunas categorías para que puedas probar el proyecto.
@@ -121,7 +111,7 @@ Las variables de entorno que utiliza el proyecto para poder ejecutarse son las s
    ('Technology & Electronics');
    ```
 
-6. Ejecutar el servidor:
+5. Ejecutar el servidor:
 
    Si no hubo errores al hacer las migraciones, puedes ejecutar el servidor.
 
@@ -462,7 +452,7 @@ Modelos:
   - **createdAt**: DateTime ✅
   - **updatedAt**: DateTime ✅
   - **orderItems**: List<OrderItem> (Relación uno a muchos con ítems de orden) ✅
-> *Relaciones muchos a muchos*
+    > _Relaciones muchos a muchos_
 - OrderItem: ✅
   - **orderId**: Int (Foreign Key, referencia a la orden) ✅
   - **productId**: Int (Foreign Key, referencia al producto) ✅
