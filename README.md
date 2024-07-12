@@ -452,7 +452,7 @@ Modelos:
   - **createdAt**: DateTime ✅
   - **updatedAt**: DateTime ✅
   - **orderItems**: List<OrderItem> (Relación uno a muchos con ítems de orden) ✅
-    > _Relaciones muchos a muchos_
+> _Relaciones muchos a muchos_
 - OrderItem: ✅
   - **orderId**: Int (Foreign Key, referencia a la orden) ✅
   - **productId**: Int (Foreign Key, referencia al producto) ✅
