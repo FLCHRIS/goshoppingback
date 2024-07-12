@@ -1,22 +1,22 @@
 import { Request, Response } from 'express'
 import { CreateUserDto, LoginUserDto } from '../dto/auth.dto'
-import { isEmptyString, isValidEmail } from '../utils/validations'
+import { isValidEmail } from '../utils/validations'
 import * as authServices from '../services/auth.services'
 
 export const register = async (req: Request, res: Response) => {
   const user = req.body as CreateUserDto
 
-  if (isEmptyString(user.email)) {
+  if (user.email === undefined || user.email === null) {
     return res.status(400).json({ message: 'Email is required' })
-  }
-  if (isEmptyString(user.userName)) {
-    return res.status(400).json({ message: 'UserName is required' })
-  }
-  if (isEmptyString(user.password)) {
-    return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
     return res.status(400).json({ message: 'Email is not valid' })
+  }
+  if (user.password === undefined || user.password === null || user.password.trim() === '') {
+    return res.status(400).json({ message: 'Password is required' })
+  }
+  if (user.userName === undefined || user.userName === null || user.userName.trim() === '') {
+    return res.status(400).json({ message: 'UserName is required' })
   }
 
   const userCreated = await authServices.register(user)
@@ -27,14 +27,14 @@ export const register = async (req: Request, res: Response) => {
 export const logIn = async (req: Request, res: Response) => {
   const user = req.body as LoginUserDto
 
-  if (isEmptyString(user.email)) {
+  if (user.email === undefined || user.email === null) {
     return res.status(400).json({ message: 'Email is required' })
-  }
-  if (isEmptyString(user.password)) {
-    return res.status(400).json({ message: 'Password is required' })
   }
   if (!isValidEmail(user.email)) {
     return res.status(400).json({ message: 'Email is not valid' })
+  }
+  if (user.password === undefined || user.password === null || user.password.trim() === '') {
+    return res.status(400).json({ message: 'Password is required' })
   }
 
   const { error, message, status, token, data } = await authServices.logIn(user)
