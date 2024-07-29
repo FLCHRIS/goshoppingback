@@ -24,15 +24,16 @@ model ImageUser {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   userName  String
   password  String
-  email     String     @unique
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @default(now())
+  email     String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now())
   products  Product[]
   orders    Order[]
   image     ImageUser?
+  favorites Favorites[]
 }
 
 model Category {
@@ -52,19 +53,21 @@ model ImageProduct {
 }
 
 model Product {
-  id          Int            @id @default(autoincrement())
-  userId      Int
-  categoryId  Int
-  name        String
-  description String         @db.Text
-  price       Float
-  stock       Int
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @default(now())
-  user        User           @relation(fields: [userId], references: [id])
-  category    Category       @relation(fields: [categoryId], references: [id])
-  images      ImageProduct[]
-  orderItems  OrderItem[]
+  id              Int               @id @default(autoincrement())
+  userId          Int
+  categoryId      Int
+  name            String
+  description     String            @db.Text
+  price           Float
+  stock           Int
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @default(now())
+  user            User              @relation(fields: [userId], references: [id])
+  category        Category          @relation(fields: [categoryId], references: [id])
+  images          ImageProduct[]
+  orderItems      OrderItem[]
+  favorites       Favorites[]
+  FavoriteProduct FavoriteProduct[]
 }
 
 enum OrderStatus {
@@ -92,4 +95,21 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
 
   @@id([orderId, productId])
+}
+
+model Favorites {
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime          @default(now())
+  userId          Int
+  products        Product[]
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  FavoriteProduct FavoriteProduct[]
+}
+
+model FavoriteProduct {
+  id         Int       @id @default(autoincrement())
+  favoriteId Int
+  productId  Int
+  favorite   Favorites @relation(fields: [favoriteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product    Product   @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
