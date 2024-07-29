@@ -9,3 +9,5 @@ yarn.lock
 uploads
 
 prisma/migrations/
+
+build/
